@@ -1,4 +1,5 @@
-
+#Kaitlyn Sourignosack
+#1824497
 lemonjuice = int(input("Enter amount of lemon juice (in cups):""\n"))
 water = int(input("Enter amount of water (in cups):""\n"))
 agavenectar = float(input("Enter amount of agave nectar (in cups):""\n"))
