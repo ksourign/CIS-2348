@@ -1,13 +1,13 @@
 # ZyLabs & HW2
 __6.17__ - Password Modifier <br />
-6.22 - Brute Force Equation Solver <br />
-7.25 - Exact Change - Functions <br />
-8.10 - Palindrome <br />
-9.10 - Word Frequencies (lists)<br />
+__6.22__ - Brute Force Equation Solver <br />
+__7.25__ - Exact Change - Functions <br />
+__8.10__ - Palindrome <br />
+__9.10__ - Word Frequencies (lists)<br />
 
-Homework2 - a basic program that performs simple file and mathematical operations
+__Homework2__ - a basic program that performs simple file and mathematical operations
 
-Ex: If the input is: <br />
+__Ex:__ If the input is: <br />
 March 1, 1990 <br />
 April 2 1995 <br />
 7/15/20 <br />
