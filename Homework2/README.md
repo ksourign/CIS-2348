@@ -8,13 +8,13 @@ __9.10__ - Word Frequencies (lists)<br />
 __Homework2__ - a basic program that performs simple file and mathematical operations
 
 __Ex:__ If the input is: <br />
-March 1, 1990 <br />
-April 2 1995 <br />
-7/15/20 <br />
-December 13, 2003 <br />
-May 1, 2023 <br />
+_March 1, 1990 <br />
+_April 2 1995 <br />
+_7/15/20 <br />
+_December 13, 2003 <br />
+_May 1, 2023 <br />
 -1 <br />
 
 then the output is: <br />
-3/1/1990 <br />
+_3/1/1990 <br />
 12/13/2003 <br />
