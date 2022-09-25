@@ -1,3 +1,3 @@
 #Kaitlyn Sourignosack
 
-This is project about Dates
+This folder contains labs from Zybooks called, ZyLabs.
