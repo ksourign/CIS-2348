@@ -7,7 +7,8 @@ __9.10__ - Word Frequencies (lists)<br />
 
 __Homework2__ - a basic program that performs simple file and mathematical operations
 
-__Ex:__ Input: <br />
+__Example:__ 
+Input: <br />
 _March 1, 1990_ <br />
 _April 2 1995_ <br />
 _7/15/20_ <br />
