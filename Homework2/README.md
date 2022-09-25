@@ -1,5 +1,5 @@
 # ZyLabs & HW2
-6.17 - Password Modifier <br />
+__6.17__ - Password Modifier <br />
 6.22 - Brute Force Equation Solver <br />
 7.25 - Exact Change - Functions <br />
 8.10 - Palindrome <br />
