@@ -11,8 +11,6 @@ with open (input('filename:')) as a:
     for x in contents:
         if(x != '-1'):
             datelist.append (x.strip())
-#print ('Datelist:',datelist)
-
 
 #Step 1: Checking dates in lists for COMMA FORMAT
 #Step 2: For-looping the string in each element (dates) of list & checking the months w/ def ismonthinlist; if it passes the month check, it goes to correctformatlist
@@ -39,9 +37,6 @@ for listitem in datelist:
                     month = ''
                     break
 
-#print ('correctformatlist:',correctformatlist)
-
-
 #Step 1: Checking if DATE is later than CURRENT DATE
 #Step 2: Appending correct DATETIMES w/ CLOSE correct FORMAT RESULT (W/ZEROES) in another list (must convert string to dateobject)
 dateobjectlist = []
@@ -52,7 +47,6 @@ for q in correctformatlist:
     if (currentdate > dateobject):
         dateformat = dateobject.strftime("%m/%d/%Y")
         dateobjectlist.append (dateformat)
-#print ('dateobject list:',dateobjectlist)
 
 
 #dateobject in dateobjectlist converted to CORRECT RESULT format STRING W/O ZEROES
