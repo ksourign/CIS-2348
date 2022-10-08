@@ -62,7 +62,7 @@ for u in dateobjectlist:
             newformat += '\n'
 print (newformat)
 
-
+#PART C
 #WRITING the correct results to parsedDates.txt
 with open ('parsedDates.txt', 'w') as a:
     a.write (newformat)
