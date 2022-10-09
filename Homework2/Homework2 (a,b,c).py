@@ -48,7 +48,6 @@ for q in correctformatlist:
         dateformat = dateobject.strftime("%m/%d/%Y")
         dateobjectlist.append (dateformat)
 
-
 #dateobject in dateobjectlist converted to CORRECT RESULT format STRING W/O ZEROES
 newformat = ''
 
