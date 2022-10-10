@@ -1,12 +1,12 @@
 #Kaitlyn Sourignosack
 #1824497
 
-#PART A
+#PART B
 from datetime import datetime, date
 
 #Opening file, putting each date into list as STRINGS
 datelist = []
-with open (input('filename:')) as a:
+with open ('inputDates.txt') as a:
 
     contents = a.readlines()
     for x in contents:
