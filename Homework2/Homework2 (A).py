@@ -6,7 +6,7 @@ from datetime import datetime, date
 
 #Opening file, putting each date into list as STRINGS
 datelist = []
-with open (input('filename:')) as a:
+with open (input('inputDates.txt')) as a:
 
     contents = a.readlines()
     for x in contents:
