@@ -60,3 +60,8 @@ for u in dateobjectlist:
         if (t == (len(u) - 1)):
             newformat += '\n'
 print (newformat)
+
+#Part C
+#WRITING the correct results to parsedDates.txt
+with open ('parsedDates.txt', 'w') as a:
+    a.write (newformat)
