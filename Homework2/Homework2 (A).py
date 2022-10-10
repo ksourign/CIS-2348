@@ -1,7 +1,7 @@
 #Kaitlyn Sourignosack
 #1824497
 
-#PART A
+#PART B
 from datetime import datetime, date
 
 #Opening file, putting each date into list as STRINGS
