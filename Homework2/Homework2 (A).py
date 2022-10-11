@@ -1,18 +1,22 @@
 #Kaitlyn Sourignosack
 #1824497
 
-#PART A
+#PART B
 from datetime import datetime, date
 
 #Opening file, putting each date into list as STRINGS
 datelist = []
+with open ('inputDates.txt') as a:
+
+    contents = a.readlines()
+    for x in contents:
+        if(x != '-1'):
+            datelist.append (x.strip())
+
+#Step 1: Checking dates in lists for COMMA FORMAT
+#Step 2: For-looping the string in each element (dates) of list & checking the months w/ def ismonthinlist; if it passes the month check, it goes to correctformatlist
 correctformatlist = []
 month = ''
-
-date = str (input ())
-while date != '-1':
-    datelist.append (date)
-    date = str (input ())
 
 #For checking the dates w/ ","
 def ismonthinlist(month):
@@ -22,7 +26,6 @@ def ismonthinlist(month):
     else:
         return True
 
-#Finding ',' in the correct date inputs, making sure the month is spelled correctly
 for listitem in datelist:
     if listitem.find (',') != -1:
         for itemindex in range(len(listitem)-1):
