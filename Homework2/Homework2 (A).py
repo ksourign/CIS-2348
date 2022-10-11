@@ -1,12 +1,12 @@
 #Kaitlyn Sourignosack
 #1824497
 
-#PART B
+#PART C
 from datetime import datetime, date
 
 #Opening file, putting each date into list as STRINGS
 datelist = []
-with open ('inputDates.txt') as a:
+with open ("inputDates.txt") as a:
 
     contents = a.readlines()
     for x in contents:
@@ -61,3 +61,7 @@ for u in dateobjectlist:
         if (t == (len(u) - 1)):
             newformat += '\n'
 print (newformat)
+
+#WRITING the correct results to parsedDates.txt
+with open ('parsedDates.txt', 'w') as a:
+    a.write (newformat)
