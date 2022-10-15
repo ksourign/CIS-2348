@@ -20,7 +20,7 @@ month = ''
 
 #For checking the dates w/ ","
 def ismonthinlist(month):
-    monthlist = ['January','March','April','May','June','July','August','September','October','November','December']
+    monthlist = ['January','February','March','April','May','June','July','August','September','October','November','December']
     if month not in monthlist:
         return False
     else:
