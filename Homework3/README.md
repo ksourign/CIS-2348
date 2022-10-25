@@ -1,4 +1,4 @@
-# ZyLabs & HW3
+# HW3 Zylabs
 __10.11__ - Nutritional Information <br />
 __10.15__ - Winning Team <br />
 __10.17__ - Online Shopping Cart (Part 1) <br />
