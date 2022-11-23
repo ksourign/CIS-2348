@@ -142,18 +142,29 @@ def finding_diff_inv_types ():
 
 def writing_diff_inv_types ():
     typelist = []
-
-    for i in range (len (diff_inv_types) -1):
+    for i in range (len (diff_inv_types)-1):
 
         if diff_inv_types [i][2] == diff_inv_types [i+1][2] or (diff_inv_types [i][2] != diff_inv_types [i+1][2]):
             typelist.append (diff_inv_types[i])
-        if i == len (diff_inv_types) - 2:
+        if (i == len (diff_inv_types) - 2 and diff_inv_types [i][2] == diff_inv_types [i+1][2]):
             typelist.append (diff_inv_types [i+1])
 
 
-        if diff_inv_types [i][2] != diff_inv_types [i+1][2] or i == len (diff_inv_types)-2:
+        elif (i == len(diff_inv_types) - 2) and (diff_inv_types[i][2] != diff_inv_types[i+1][2]):
+            typelist.append (diff_inv_types[i+1])
+            name = diff_inv_types[i+1][2]
+            csvname = name.capitalize()
+            with open(f'{csvname}Inventory.csv', 'w') as type_csv_file:
+                diff_inv_types_COPY = typelist[len(typelist) - 1][:2] + typelist[len(typelist) - 1][3:]
+                type_csv_file.write(','.join(diff_inv_types_COPY))
+                type_csv_file.write('\n')
+            typelist.pop (len(typelist)-1)
+
+
+        if (diff_inv_types [i][2] != diff_inv_types [i+1][2]) or (i == len (diff_inv_types)-2):
             name = diff_inv_types [i][2]
             csvname = name.capitalize()
+
             with open(f'{csvname}Inventory.csv', 'w') as type_csv_file:
                 for i in typelist:
                     diff_inv_types_COPY = i[:2]+i[3:]
