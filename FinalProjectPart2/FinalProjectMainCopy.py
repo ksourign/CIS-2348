@@ -341,7 +341,7 @@ def countoccurences (manufacturer, itemtype):
 
 def findoccurence (manufacturer, itemtype):
     position = -1
-    print ('testing',manufacturer,itemtype)
+    # print ('testing',manufacturer,itemtype)
     for i in range (len(FullInventory_List)):
         if (FullInventory_List[i][1].find(manufacturer) > -1) and (FullInventory_List[i][2].find(itemtype) > -1):
             position = i
@@ -357,6 +357,7 @@ def findoccurences (manufacturer, itemtype):
     return positionlist
 
 def findmostexpensive (listofoccurences):
+    print ('list of occurences',listofoccurences)
     mostexpensive = 0
     for i in listofoccurences:
         priceint = int(FullInventory_List[i][3])
@@ -439,58 +440,68 @@ def printitem (pos):
 
 
 #FIND the user's given manufacturer
-# and itemtype in list - OUTPUTTING DETAILS of the item
-# def infullinventory (list):
-#     print ('goes thru')
-#
-#     manufacturer_input = list [0].capitalize()
-#     itemtype_input = list [1].lower()
-#
-#     print (manufacturer_input, itemtype_input)
-#     new_occurencepositions = []
-#
-#     if countoccurences (manufacturer_input.capitalize(), itemtype_input.lower()) == 1:
-#         # print ('occurences:',countoccurences (manufacturer_input.capitalize(), itemtype_input.lower()))
-#
-#         position = findoccurence(manufacturer_input.capitalize(), itemtype_input.lower())
-#
-#         if ifdamaged(FullInventory_List[position]) == False and ifpastservicedate(FullInventory_List[position]) == False:
-#             printitem(position)
-#             find_same_itemtype_suggestion(itemtype_input,position)
-#         else:
-#             print ('No such item in inventory')
-#             print ()
-#
-#     elif countoccurences(manufacturer_input.capitalize(),itemtype_input.lower()) > 1:
-#         occurencepositions = findoccurences(manufacturer_input.capitalize(), itemtype_input.lower())
-#         # print ('occurencepositions',occurencepositions)
-#         for i in occurencepositions:
-#             if ifdamaged (FullInventory_List [i]) == False and ifpastservicedate(FullInventory_List[i]) == False:
-#                 new_occurencepositions.append (i)
-#         # print ('new occurence positions', new_occurencepositions)
-#
-#         position = findmostexpensive(new_occurencepositions)
-#         # print ('position',position)
-#         printitem(position)
-#         find_same_itemtype_suggestion(itemtype_input,position)
-#         occurencepositions.clear()
-#         new_occurencepositions.clear()
-#
-#     else:
-#         print ('No such item in inventory')
-#         print ()
-
-
-
-
+##and itemtype in list - OUTPUTTING DETAILS of the item
 def infullinventory (list):
+    print ('goes thru')
+
     manufacturer_input = list [0].capitalize()
     itemtype_input = list [1].lower()
-    print (manufacturer_input,itemtype_input)
-    position = findoccurence(manufacturer_input.capitalize(), itemtype_input.lower())
-    printitem(position)
-    find_same_itemtype_suggestion(itemtype_input,position)
-    # printsuggestion(position)
+
+    print (manufacturer_input, itemtype_input)
+    new_occurencepositions = []
+
+    if countoccurences (manufacturer_input.capitalize(), itemtype_input.lower()) == 1:
+        # print ('occurences:',countoccurences (manufacturer_input.capitalize(), itemtype_input.lower()))
+
+        position = findoccurence(manufacturer_input.capitalize(), itemtype_input.lower())
+
+        if ifdamaged(FullInventory_List[position]) == False and ifpastservicedate(FullInventory_List[position]) == False:
+            printitem(position)
+            find_same_itemtype_suggestion(itemtype_input,position)
+        else:
+            print ('No such item in inventory')
+            print ()
+
+    elif countoccurences(manufacturer_input.capitalize(),itemtype_input.lower()) > 1:
+        occurencepositions = findoccurences(manufacturer_input.capitalize(), itemtype_input.lower())
+        # print ('occurencepositions',occurencepositions)
+        for i in occurencepositions:
+            if ifdamaged (FullInventory_List [i]) == False and ifpastservicedate(FullInventory_List[i]) == False:
+                new_occurencepositions.append (i)
+            else:
+                print ('No such item in inventory')
+                print ()
+                break
+        # print ('new occurence positions', new_occurencepositions)
+        if len (new_occurencepositions) > 0:
+            position = findmostexpensive(new_occurencepositions)
+            # print ('position',position)
+            printitem(position)
+            find_same_itemtype_suggestion(itemtype_input,position)
+
+
+    else:
+        print ('No such item in inventoryyy')
+        print ()
+
+
+
+#
+# def infullinventory (list):
+#     manufacturer_input = list [0].capitalize()
+#     itemtype_input = list [1].lower()
+#     print (manufacturer_input,itemtype_input)
+#     position = findoccurence(manufacturer_input.capitalize(), itemtype_input.lower())
+#
+#
+#
+#     if ifdamaged(FullInventory_List[position]) == False and ifpastservicedate(FullInventory_List[position]) == False:
+#
+#         printitem(position)
+#         find_same_itemtype_suggestion(itemtype_input,position)
+#     else:
+#         print ('No such item in inventory')
+#     printsuggestion(position)
 
 #this method exists all bc of the space in 'Apple '
 #MUST use string.find () >-1
@@ -752,7 +763,7 @@ if __name__ == '__main__':
             if len (inputlist) == 2:
                 infullinventory(inputlist)
             else:
-                print ('No SUCH ITEM FROM OUTPUT CODE')
+                print ('No SUCH ITEM in inventory FROM OUTPUT CODE')
             # removed_irrelevant_words = checkandremove_otherwords(input_splitlist)
             # removed_multiples = checking_and_removing_multiple_types_and_manuf(removed_irrelevant_words)
             #
