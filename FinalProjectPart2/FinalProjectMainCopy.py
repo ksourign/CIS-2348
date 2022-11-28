@@ -505,6 +505,7 @@ if __name__ == '__main__':
                 inputlist.clear()
             else:
                 print ('No such item in inventory')
+                print ()
 
         elif userinput == 'q' and userinput != 'Q':
             break
