@@ -40,14 +40,34 @@ suggestions = []
 positionlist = []
 
 
+
+
 with open (r"ManufacturerList.csv", 'r') as csv_manufacturerfile:
     contentlist = csv.reader(csv_manufacturerfile)
     for i in contentlist:
         manufacturersorted.append(i[1])
         csvreader_copy.append (i)
+
+#manufac_set remove duplicates
+
+    # removing space in csv copy
+    for i in range(len(csvreader_copy)):
+        if csvreader_copy[i][1].find(' ') > -1:
+            removespace = csvreader_copy[i][1][:len(csvreader_copy[i][1]) - 1]
+            csvreader_copy[i][1] = removespace
+
+    # print ('csv')
+    # for i in csvreader_copy:
+    #     print(','.join(i))
+
+    # Remove extra space ahead of Manufacturer (Ex: Apple_ )
+    for i in range(len(manufacturersorted)):
+        if manufacturersorted[i].find(' ') > -1:
+            removespace = manufacturersorted[i][:len(manufacturersorted[i]) - 1]
+            manufacturersorted[i] = removespace
+    # print ('TESTING',manufacturersorted)
     manufac_set = set(manufacturersorted)
     # print ('manufac set',manufac_set)
-#manufac_set remove duplicates
 
 
 
@@ -60,24 +80,11 @@ with open (r"ManufacturerList.csv", 'r') as csv_manufacturerfile:
     # print ('manufacturersorted',manufacturersorted)
 
 
-    # Remove extra space ahead of Manufacturer (Ex: Apple_ )
-    for i in range(len(manufacturersorted)):
-        if manufacturersorted[i].find(' ') > -1:
-            removespace = manufacturersorted[i][:len(manufacturersorted[i]) - 1]
-            manufacturersorted[i] = removespace
+
+
     # print('manufacturersorted', manufacturersorted)
 
-#removing space in csv copy
-    for i in range(len(csvreader_copy)):
-        if csvreader_copy[i][1].find(' ') > -1:
-            removespace = csvreader_copy[i][1][:len(csvreader_copy[i][1]) - 1]
-            csvreader_copy[i][1] = removespace
 
-
-
-    # print ('csv')
-    # for i in csvreader_copy:
-    #     print(','.join(i))
 
 
 
@@ -138,9 +145,10 @@ def finding_fullinventory ():
 #writing full inventory csv
 def writing_csv_full_inventory ():
     with open ('FullInventory.csv', 'w') as Full_Inventory_csv_file:
-        for i in FullInventory_List:
-            Full_Inventory_csv_file.write (','.join(i))
-            Full_Inventory_csv_file.write ('\n')
+        for i in range (len(FullInventory_List)):
+            Full_Inventory_csv_file.write (','.join(FullInventory_List[i]))
+            if i != len (FullInventory_List) - 1:
+                Full_Inventory_csv_file.write ('\n')
 
 # print ('from writing past service date ', FullInventory_List)
 
@@ -216,7 +224,7 @@ def writing_diff_inv_types ():
 
 #PART C
 def finding_pastservicedates():
-
+    # print ('yes',listsorteddate_wdetails)
     #connecting sorted dates with ID details
     for i in range (len (listsorteddate_wdetails)):
         for j in range (len (FullInventory_List)):
@@ -357,7 +365,7 @@ def findoccurences (manufacturer, itemtype):
     return positionlist
 
 def findmostexpensive (listofoccurences):
-    print ('list of occurences',listofoccurences)
+    # print ('list of occurences that is valid',listofoccurences)
     mostexpensive = 0
     for i in listofoccurences:
         priceint = int(FullInventory_List[i][3])
@@ -442,19 +450,19 @@ def printitem (pos):
 #FIND the user's given manufacturer
 ##and itemtype in list - OUTPUTTING DETAILS of the item
 def infullinventory (list):
-    print ('goes thru')
+    # print ('goes thru')
 
     manufacturer_input = list [0].capitalize()
     itemtype_input = list [1].lower()
 
-    print (manufacturer_input, itemtype_input)
+    # print (manufacturer_input, itemtype_input)
     new_occurencepositions = []
 
     if countoccurences (manufacturer_input.capitalize(), itemtype_input.lower()) == 1:
-        # print ('occurences:',countoccurences (manufacturer_input.capitalize(), itemtype_input.lower()))
+        # print ('occurences:',countoccurences (manufacturer_input, itemtype_input))
 
         position = findoccurence(manufacturer_input.capitalize(), itemtype_input.lower())
-
+        # print ('position', position)
         if ifdamaged(FullInventory_List[position]) == False and ifpastservicedate(FullInventory_List[position]) == False:
             printitem(position)
             find_same_itemtype_suggestion(itemtype_input,position)
@@ -466,18 +474,29 @@ def infullinventory (list):
         occurencepositions = findoccurences(manufacturer_input.capitalize(), itemtype_input.lower())
         # print ('occurencepositions',occurencepositions)
         for i in occurencepositions:
+            # print (FullInventory_List [i])
             if ifdamaged (FullInventory_List [i]) == False and ifpastservicedate(FullInventory_List[i]) == False:
                 new_occurencepositions.append (i)
-            else:
-                print ('No such item in inventory')
-                print ()
-                break
+            # elif ifdamaged (FullInventory_List [i]) == False:
+            #     print ('Item damaged')
+            #     print (FullInventory_List [i])
+            #     break
+            # elif ifpastservicedate(FullInventory_List [i] == False):
+            #     print ('Item past service date')
+            #     print (FullInventory_List [i])
+            #     break
+        # else:
+        #     print ('No such item in inventoryvsfvd')
+        #     print ()
+
         # print ('new occurence positions', new_occurencepositions)
         if len (new_occurencepositions) > 0:
             position = findmostexpensive(new_occurencepositions)
             # print ('position',position)
             printitem(position)
             find_same_itemtype_suggestion(itemtype_input,position)
+            new_occurencepositions.clear()
+            occurencepositions.clear()
 
 
     else:
@@ -762,6 +781,7 @@ if __name__ == '__main__':
             # print (inputlist)
             if len (inputlist) == 2:
                 infullinventory(inputlist)
+                inputlist.clear()
             else:
                 print ('No SUCH ITEM in inventory FROM OUTPUT CODE')
             # removed_irrelevant_words = checkandremove_otherwords(input_splitlist)
