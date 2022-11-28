@@ -32,11 +32,8 @@ allitemtype = []
 #list for III
 suggestions = []
 
-#removing multiple types
-# input_splitlist = []
 
-#stuff for PART II
-# output = 'Your item is: '
+#list for PART II
 positionlist = []
 
 
@@ -48,28 +45,21 @@ with open (r"ManufacturerList.csv", 'r') as csv_manufacturerfile:
         manufacturersorted.append(i[1])
         csvreader_copy.append (i)
 
-#manufac_set remove duplicates
 
-    # removing space in csv copy
+# removing space in csv copy
     for i in range(len(csvreader_copy)):
         if csvreader_copy[i][1].find(' ') > -1:
             removespace = csvreader_copy[i][1][:len(csvreader_copy[i][1]) - 1]
             csvreader_copy[i][1] = removespace
 
-    # print ('csv')
-    # for i in csvreader_copy:
-    #     print(','.join(i))
 
-    # Remove extra space ahead of Manufacturer (Ex: Apple_ )
+# Remove extra space ahead of Manufacturer (Ex: Apple_ )
+#manufac_set remove duplicates in manufacturer sorted
     for i in range(len(manufacturersorted)):
         if manufacturersorted[i].find(' ') > -1:
             removespace = manufacturersorted[i][:len(manufacturersorted[i]) - 1]
             manufacturersorted[i] = removespace
-    # print ('TESTING',manufacturersorted)
     manufac_set = set(manufacturersorted)
-    # print ('manufac set',manufac_set)
-
-
 
 
 #SORTS A-Z in manufac_set IN manufacturersorted
@@ -77,15 +67,6 @@ with open (r"ManufacturerList.csv", 'r') as csv_manufacturerfile:
     for a in manufac_set:
         manufacturersorted.append (a)
     manufacturersorted.sort()
-    # print ('manufacturersorted',manufacturersorted)
-
-
-
-
-    # print('manufacturersorted', manufacturersorted)
-
-
-
 
 
 #manufacturesorted_wdetails include other details of the sorted manufacturers
@@ -97,10 +78,6 @@ with open (r"ManufacturerList.csv", 'r') as csv_manufacturerfile:
                     manufacturersorted[i] = manufacturersorted[i][:manufacturersorted[i].find (' ')]
                 else:
                     manufacturersorted_wdetails.append (j)
-    # print ('manufacturersorted w details',manufacturersorted_wdetails)
-    # for i in manufacturersorted_wdetails:
-    #     print(','.join(i))
-
 
 
 
@@ -109,8 +86,6 @@ with open (r"ManufacturerList.csv", 'r') as csv_manufacturerfile:
         for i in manufacturersorted_wdetails:
             if i[0] == j[0]:
                 i.insert (3, j[1])
-    # print ()
-    # print ('manufacturer sorted w details and PRICE',manufacturersorted_wdetails)
 
 
 
@@ -122,15 +97,10 @@ with open (r"ManufacturerList.csv", 'r') as csv_manufacturerfile:
                 j.insert (2,i[2])
                 j.insert (3,i[3])
                 j.insert (5,i[4])
-    # print ()
-    # print ('list sorted w details and DATES',listsorteddate_wdetails)
 
 
 
 #######################################
-
-# print ('HELLO',manufacturersorted)
-
 
 
 #PART A
@@ -140,7 +110,6 @@ def finding_fullinventory ():
         for i in listsorteddate_wdetails:
             if (i [1] == j):
                 FullInventory_List.append (i)
-    # print ('Fullinventory',FullInventory_List)
 
 #writing full inventory csv
 def writing_csv_full_inventory ():
@@ -150,21 +119,7 @@ def writing_csv_full_inventory ():
             if i != len (FullInventory_List) - 1:
                 Full_Inventory_csv_file.write ('\n')
 
-# print ('from writing past service date ', FullInventory_List)
 
-
-
-
-#OUTSIDE of WITH OPEN
-#FOR SEEING FULL INVENTORY LIST
-# for i in FullInventory_List:
-#     print(','.join(i))
-
-# print (FullInventory_List)
-
-
-
-#########################################
 
 
 #PART B
@@ -181,9 +136,6 @@ def finding_diff_inv_types ():
                     diff_inv_types.append (i)
             else:
                 continue
-
-    # for i in diff_inv_types:
-    #     print(','.join(i))
 
 
 def writing_diff_inv_types ():
@@ -218,13 +170,10 @@ def writing_diff_inv_types ():
                     type_csv_file.write('\n')
 
             typelist.clear()
-    # print (diff_inv_types)
 
-##################################
 
 #PART C
 def finding_pastservicedates():
-    # print ('yes',listsorteddate_wdetails)
     #connecting sorted dates with ID details
     for i in range (len (listsorteddate_wdetails)):
         for j in range (len (FullInventory_List)):
@@ -234,8 +183,6 @@ def finding_pastservicedates():
                 continue
 
 
-
-
     currentdate = datetime.today()
 
     for i in FullInventory_List:
@@ -243,20 +190,16 @@ def finding_pastservicedates():
 
         if dateobject1 < currentdate:
             PastServiceDate_List.append (i)
-    # print ('Past service date list',PastServiceDate_List)
-
-
 
 
     for i in oldest_to_recent_inventory:
         if i in PastServiceDate_List:
             sorted_pastservicedate.append (i)
-    # print ('SORTED PAST',sorted_pastservicedate)
 
 
 
+            
 def writing_csv_past_service_date_inventory ():
-
     with open ('PastServiceDateInventory.csv', 'w') as Past_Service_Date_Inventory_csv_file:
         for q in sorted_pastservicedate:
             sorted_pastservicedate_ListCOPY = q [:5]
@@ -276,20 +219,12 @@ def finding_damaged_inventory ():
             if i[0] == j[0]:
                 mostexpensive_to_least_list.append (i)
 
-    # print ('price least to greatest',mostexpensive_to_least_list)
-    # for i in mostexpensive_to_least_list:
-    #     print(','.join(i))
-
-
-
-
-
     #Finding damaged inventory
     for l in mostexpensive_to_least_list:
         if l [5] == 'damaged':
             damaged_inventory_list.append (l)
-    # print ('damaged inventory listt',damaged_inventory_list)
 
+            
 def writing_csv_dmg_inventory ():
     with open ('DamagedInventory.csv', 'w') as damaged_inventory_csv_file:
         for q in damaged_inventory_list:
@@ -299,7 +234,6 @@ def writing_csv_dmg_inventory ():
 
 
 
-#############################################################################################
 
 
 
@@ -313,10 +247,6 @@ def printmenu():
 def finding_allitemtype():
     for i in diff_inv_types:
         allitemtype.append (i[2])
-    # print ('allitemtype list',allitemtype)
-
-
-
 
 
 
@@ -339,33 +269,24 @@ def countoccurences (manufacturer, itemtype):
             count += 2
     return int (count/2)
 
-# def ifoccurence (inputlist):
-#     manufacturer = inputlist[0]
-#     itemtype = inputlist [1]
-#     for i in range (len(inputlist)):
-#         if FullInventory_List.find (manufacturer) > -1 and FullInventory_List.find (itemtype):
-#             count+= 2
-#     return int (count/2)
+
 
 def findoccurence (manufacturer, itemtype):
     position = -1
-    # print ('testing',manufacturer,itemtype)
     for i in range (len(FullInventory_List)):
         if (FullInventory_List[i][1].find(manufacturer) > -1) and (FullInventory_List[i][2].find(itemtype) > -1):
             position = i
-            # positionlist.append (i)
-    # print (positionlist)
     return position
 
 def findoccurences (manufacturer, itemtype):
-
     for i in range(len(FullInventory_List)):
         if (FullInventory_List[i][1].find(manufacturer) > -1) and (FullInventory_List[i][2].find(itemtype) > -1):
             positionlist.append (i)
     return positionlist
 
+
+
 def findmostexpensive (listofoccurences):
-    # print ('list of occurences that is valid',listofoccurences)
     mostexpensive = 0
     for i in listofoccurences:
         priceint = int(FullInventory_List[i][3])
@@ -390,7 +311,7 @@ def find_same_itemtype_suggestion (itemtype,pos):
 
 
 
-# III
+#Part III
 def printsuggestion (pos):
     suggestionoutput = 'You may,also,consider: '
     itemoutput = FullInventory_List[pos][:4]
@@ -407,7 +328,7 @@ def printsuggestion (pos):
                 suggestionoutput += itemoutput [i]
     print (suggestionoutput)
 
-#II
+#Part II
 def printitem (pos):
     output = 'Your item type is: '
     itemoutput = FullInventory_List[pos][:4]
@@ -425,44 +346,19 @@ def printitem (pos):
     print (output)
 
 
-#Output the correct list by deleting all irrelevant words (works w spaced out inputs only)
-# def checkandremove_otherwords (list):
-#     removed = []
-#     # count = 0
-#
-#     for i in list:
-#         if inmanufacturersorted(i) == True or inallitemtype(i) == True:
-#             # count += 1
-#             removed.append (i)
-#         else:
-#             continue
-#     return removed
-
-    # if count > 0:
-    #     return removed
-    # else:
-    #     return False
-
-
-
-
-
-#FIND the user's given manufacturer
-##and itemtype in list - OUTPUTTING DETAILS of the item
+ 
+#Finding a user's valid given manufacturer and itemtype in FullInventory list 
+#OUTPUTTING DETAILS of the most expensive, non-damaged, not past service date item
 def infullinventory (list):
-    # print ('goes thru')
 
     manufacturer_input = list [0].capitalize()
     itemtype_input = list [1].lower()
 
-    # print (manufacturer_input, itemtype_input)
     new_occurencepositions = []
 
     if countoccurences (manufacturer_input.capitalize(), itemtype_input.lower()) == 1:
-        # print ('occurences:',countoccurences (manufacturer_input, itemtype_input))
 
         position = findoccurence(manufacturer_input.capitalize(), itemtype_input.lower())
-        # print ('position', position)
         if ifdamaged(FullInventory_List[position]) == False and ifpastservicedate(FullInventory_List[position]) == False:
             printitem(position)
             find_same_itemtype_suggestion(itemtype_input,position)
@@ -472,27 +368,12 @@ def infullinventory (list):
 
     elif countoccurences(manufacturer_input.capitalize(),itemtype_input.lower()) > 1:
         occurencepositions = findoccurences(manufacturer_input.capitalize(), itemtype_input.lower())
-        # print ('occurencepositions',occurencepositions)
         for i in occurencepositions:
-            # print (FullInventory_List [i])
             if ifdamaged (FullInventory_List [i]) == False and ifpastservicedate(FullInventory_List[i]) == False:
                 new_occurencepositions.append (i)
-            # elif ifdamaged (FullInventory_List [i]) == False:
-            #     print ('Item damaged')
-            #     print (FullInventory_List [i])
-            #     break
-            # elif ifpastservicedate(FullInventory_List [i] == False):
-            #     print ('Item past service date')
-            #     print (FullInventory_List [i])
-            #     break
-        # else:
-        #     print ('No such item in inventoryvsfvd')
-        #     print ()
 
-        # print ('new occurence positions', new_occurencepositions)
         if len (new_occurencepositions) > 0:
             position = findmostexpensive(new_occurencepositions)
-            # print ('position',position)
             printitem(position)
             find_same_itemtype_suggestion(itemtype_input,position)
             new_occurencepositions.clear()
@@ -500,58 +381,16 @@ def infullinventory (list):
 
 
     else:
-        print ('No such item in inventoryyy')
+        print ('No such item in inventory')
         print ()
 
 
 
-#
-# def infullinventory (list):
-#     manufacturer_input = list [0].capitalize()
-#     itemtype_input = list [1].lower()
-#     print (manufacturer_input,itemtype_input)
-#     position = findoccurence(manufacturer_input.capitalize(), itemtype_input.lower())
-#
-#
-#
-#     if ifdamaged(FullInventory_List[position]) == False and ifpastservicedate(FullInventory_List[position]) == False:
-#
-#         printitem(position)
-#         find_same_itemtype_suggestion(itemtype_input,position)
-#     else:
-#         print ('No such item in inventory')
-#     printsuggestion(position)
-
-#this method exists all bc of the space in 'Apple '
-#MUST use string.find () >-1
-#ONLY works if you already know the established manufacturer you are looking for - THIS defines the user's input of what is a manufacturer
-
-
-
-
-# def countmanufacturer (somelist):
-#     count = 0
-#     for i in range(len(somelist)):
-#         if (inmanufacturersorted(somelist[i]) == True):
-#             count += 1
-#     return count
-
-
-# def countmultipleitemtype (list):
-#     count = 0
-#     for i in list:
-#         if inallitemtype(i.lower()) == True:
-#             count += 1
-#     return count
-
 def inmanufacturersorted (manufacturer):
     manufacturer = manufacturer.capitalize()
-    print ('manufacturer input',manufacturer)
-
     for i in range (len (manufacturersorted)):
         if manufacturersorted[i] == manufacturer:
             return i
-
         else:
             continue
     else:
@@ -563,24 +402,18 @@ def inallitemtype (word):
     for i in range (len (allitemtype)):
         if allitemtype[i] == word:
             return i
-
         else:
             continue
     else:
-
         return False
-
-
-
 
 
 def fixinputlist (irrelevantword):
     newlist = []
     firstmanufac = ''
     firsttype = ''
-    #converts irrelevant word to lower so comparison works for lowercase only - avoid ApPlE
+    #converts irrelevant word to lower so comparison works for lowercase only - avoiding ApPlE
     irrelevantword = irrelevantword.lower()
-    # print (manufacturersorted)
 
     countman = 0
 
@@ -588,15 +421,12 @@ def fixinputlist (irrelevantword):
 
         if irrelevantword.find(i.lower())  > -1 and countman == 0:
             indexinstring =  irrelevantword.find(i.lower())
-            # print ('index in stringman',indexinstring)
-
 
             for j in manufacturersorted:
                 if irrelevantword.find(j.lower()) > -1:
                     index2 = irrelevantword.find(j.lower())
                     if index2 < indexinstring:
                         index2 = irrelevantword.find(j.lower())
-                        # print ('Index2',index2)
                         newlist.append(j)
                         countman += 1
                         break
@@ -606,21 +436,19 @@ def fixinputlist (irrelevantword):
         else:
             continue
 
+            
+            
     counttype = 0
 
     for i in allitemtype:
-
         if irrelevantword.find(i.lower())  > -1 and counttype == 0:
             indexinstring =  irrelevantword.find(i.lower())
-            # print ('index in string',indexinstring)
-
 
             for j in allitemtype:
                 if irrelevantword.find(j.lower()) > -1:
                     index2 = irrelevantword.find(j.lower())
                     if index2 < indexinstring:
                         index2 = irrelevantword.find(j.lower())
-                        # print ('Index2',index2)
                         newlist.append(j)
                         counttype += 1
                         break
@@ -633,112 +461,12 @@ def fixinputlist (irrelevantword):
 
     return newlist
 
-# for i in allitemtype:
-    #     if irrelevantword.find(i.lower())  > -1:
-    #         newlist.append (i)
-    #         break
-    #     else:
-    #         continue
-
-#findfirst manufacturer and putting in inputlist
-    # for i in irrelevantword:
-    #     if inmanufacturersorted(firstmanufac) is not False:
-    #         #inmanufacturersorted returns POSITION of manufacturer found in manufacturersorted
-    #         index = inmanufacturersorted(firstmanufac)
-    #         newlist.append (manufacturersorted[index])
-    #         break
-    #     else:
-    #         firstmanufac += i
-    #
-    # for j in irrelevantword:
-    #     if inallitemtype(firsttype) is not False :
-    #         print (firsttype)
-    #         index = inallitemtype(firsttype)
-    #         newlist.append (allitemtype[index])
-    #         break
-    #     else:
-    #         firsttype += j
-
-
-# def checking_and_removing_multiple_types_and_manuf (list):
-#     countmanufac = 0
-#     print ('same manufacturer count:', countmanufacturer(list),'same itemtype count:',countmultipleitemtype(list))
-#     # print (manufacturersorted)
-#     if len (list) > 2:
-#         # print (countmultipleitemtype(list))
-#         # print (countmanufacturer(list))
-#         # print ('count item type variable', countitemtype)
-#
-#         for i in range (len (list)):
-#             # and
-#             #gets the LAST REPEATED MANUFACTURER INDEX
-#             if (inmanufacturersorted(list[i]) == True):
-#                 countmanufac += 1
-#                 index = i
-#         #         print ('countman',countmanufac)
-#         #         print ('last index of repeated manufac', index)
-#
-#             #counting itemtype
-#             # and countmultipleitemtype(list) > 1:
-#             if countmanufacturer(list) == 0:
-#                 itemtype_sliced = list [:i+1]
-#                 return itemtype_sliced
-#                 break
-#             if countmultipleitemtype(list) == 0:
-#                 manufac_sliced = list [i-1:]
-#                 return manufac_sliced
-#                 break
-#             if countmanufacturer (list) == 1 and countmultipleitemtype(list) > 1:
-#
-#                 if inallitemtype(list[i].lower()) == True:
-#                     index = i+1
-#                     newlist = list [:index]
-#                     return newlist
-#                     break
-#
-#
-#
-#             #if there are manufacturer repeats - slice list when manufacturer repeats are counted AND multiple itemtypes == 1
-#             elif (countmanufacturer (list) > 1 and inallitemtype (list[i].lower()) == True and countmultipleitemtype(list) == 1):
-#                 #must make new list to not alter original list's length
-#                 manufac_sliced = list [i-1:]
-#                 print ('GO THRU 1')
-#                 return manufac_sliced
-#                 # print ('slice manufacfsgs',manufac_sliced )
-#                 break
-#
-#
-#
-#
-#             #if there are manufacturer repeats - slice list when manufacturer repeats are counted AND multiple itemtypes > 1
-#             elif (countmanufacturer(list) > 1 and countmultipleitemtype(list) > 1):
-#                 #must make new list to not alter original list's length
-#                 if inallitemtype(list[i].lower()) == True:
-#
-#                     newlist = list [index:i+1]
-#                     # print ('mafnedfsd', manufac_sliced)
-#                     # for i in range (len (manufac_sliced)):
-#                     #     if inallitemtype(manufac_sliced[i].lower) == True:
-#                     #         index = i+1
-#                     #         print ('index', index)
-#                     #         break
-#                     # newlist = manufac_sliced [:index]
-#                     print ('GO THRU 2')
-#                     return newlist
-#                     # print ('slice manufacfsgs',manufac_sliced )
-#                     break
-#
-#     else:
-#         print ('NORMAL OUTPUT with 2 inputs with spaceeee', end='')
-#         return list
-
 
 
 if __name__ == '__main__':
 #PART A
 #Outputting full inventory
     finding_fullinventory()
-    # print ('full inventory list after finding full inventory method is called',FullInventory_List)
     writing_csv_full_inventory()
 
 #PART B
@@ -749,18 +477,13 @@ if __name__ == '__main__':
 #PART C
 #Outputting past service dates inventory
     finding_pastservicedates()
-    # print ('past service date list after findingPastServicedates called',PastServiceDate_List)
-    # print ('full inventory after findingpastservice dates called',FullInventory_List)
-
     writing_csv_past_service_date_inventory()
-    # print ('full inventory after writingpastservice dates called',FullInventory_List)
 
 
 #PART D
-    #Outputting damaged inventory
+#Outputting damaged inventory
     finding_damaged_inventory()
     writing_csv_dmg_inventory()
-    # print ('dmg inventory last', damaged_inventory_list)
 
 
 #############################################################################################
@@ -770,7 +493,6 @@ if __name__ == '__main__':
     finding_allitemtype()
 
 #Interactive INVENTORY QUERY capability
-
     printmenu()
     userinput = str(input('Enter manufacturer and item type: '))
     print ()
@@ -778,25 +500,13 @@ if __name__ == '__main__':
     while userinput != 'q' and userinput != 'Q':
         if userinput != 'q' and userinput != 'Q':
             inputlist = fixinputlist (userinput)
-            # print (inputlist)
             if len (inputlist) == 2:
                 infullinventory(inputlist)
                 inputlist.clear()
             else:
-                print ('No SUCH ITEM in inventory FROM OUTPUT CODE')
-            # removed_irrelevant_words = checkandremove_otherwords(input_splitlist)
-            # removed_multiples = checking_and_removing_multiple_types_and_manuf(removed_irrelevant_words)
-            #
-            # if len (removed_multiples) < 2:
-            #     print ('Item unavailable because length is only 1 which is:',removed_multiples)
-            # else:
-            #     correctinput_splitlist = removed_multiples
-            #     print ('CORRECT input splitlist',removed_multiples)
-
-
+                print ('No such item in inventory')
 
         elif userinput == 'q' and userinput != 'Q':
-            print ('QUITTED')
             break
 
 
