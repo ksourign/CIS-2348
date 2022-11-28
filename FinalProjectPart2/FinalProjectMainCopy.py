@@ -381,6 +381,7 @@ def infullinventory (list):
 
 
     else:
+        #if input is 'appletower' something tht is in manufacturer list AND item type list but NOT an occurence
         print ('No such item in inventory')
         print ()
 
