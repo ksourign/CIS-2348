@@ -18,18 +18,14 @@ with open (r"PriceList.csv", 'r') as csv_price:
     pricesorted = []
     for a in price_set:
         pricesorted.append(a)
-    # print ('pricepricesorted', pricesorted)
-
 
     #Price sorted GREATEST to LEAST
     for i in range (len (pricesorted)):
         pricesorted [i] = int (pricesorted [i])
     pricesorted.sort(reverse = True)
-    # print (pricesorted)
 
     for i in range (len (pricesorted)):
         pricesorted [i] = str (pricesorted[i])
-    # print ('final pricesorted w string',pricesorted)
 
 
     # pricesorted w details by getting the item id from csvreader_copy and into a new list
@@ -38,5 +34,4 @@ with open (r"PriceList.csv", 'r') as csv_price:
             if (j[1] == i):
                 pricesorted_wdetails.append (j)
 
-    # print ('PRICESORTED w details',pricesorted_wdetails)
 
